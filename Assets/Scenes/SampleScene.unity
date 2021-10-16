@@ -1266,7 +1266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0.006283144, y: -0, z: -0, w: 0.9999803}
-  m_LocalPosition: {x: -0.019635677, y: -0.13604534, z: 3.6987917}
+  m_LocalPosition: {x: 0.035773277, y: -0.13604534, z: 3.6987917}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3888,7 +3888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6015786730748652804, guid: 549e1b726ca1c48beabe871ef11bf067, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.019635677
+      value: 0.035773277
       objectReference: {fileID: 0}
     - target: {fileID: 6015786730748652804, guid: 549e1b726ca1c48beabe871ef11bf067, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4096,7 +4096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.9442253
+      value: 0.98088837
       objectReference: {fileID: 0}
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4104,7 +4104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.6202326
+      value: 4.635539
       objectReference: {fileID: 0}
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4875,6 +4875,7 @@ GameObject:
   - component: {fileID: 8407447325600169641}
   - component: {fileID: 8407447325600169645}
   - component: {fileID: 8407447325600169644}
+  - component: {fileID: 8407447325600169646}
   m_Layer: 0
   m_Name: Robot Kyle
   m_TagString: Untagged
@@ -4889,7 +4890,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8407447325600169640}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8739e1cccb8845a996ebbb763974e5c, type: 3}
   m_Name: 
@@ -5037,6 +5038,24 @@ MonoBehaviour:
   - m_Rig: {fileID: 466689079}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &8407447325600169646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8407447325600169640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320be73499b4b4ce28cba59618de15d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 2
+  sprintMultiplier: 3
+  rotationSpeed: 20
+  aimSpeed: 0
+  weaponAimRigLayer: {fileID: 316360258}
+  gravity: -9.8
 --- !u!4 &8445645787861733559
 Transform:
   m_ObjectHideFlags: 0
