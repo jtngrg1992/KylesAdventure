@@ -5,6 +5,7 @@ public class AimingState : MovingState
 {
     private bool isAiming;
     private InputAction aimAction;
+    private bool isShooting;
 
     public AimingState(Character character, StateMachine stateMachine) : base(character, stateMachine)
     {
@@ -27,6 +28,8 @@ public class AimingState : MovingState
         if (!isAiming)
         {
             character.EndAiming();
+            character.moving.smoothMovementInput = this.smoothMovementInput;
+            character.moving.rawInput = this.rawInput;
             stateMachine.GoBackToPrevState();
         }
         else
@@ -40,6 +43,8 @@ public class AimingState : MovingState
         base.Exit();
         aimAction.canceled -= (_) => CancelAim();
         smoothMovementInput = Vector2.zero;
+        isShooting = false;
+        isAiming = false;
     }
 
     private void CancelAim()

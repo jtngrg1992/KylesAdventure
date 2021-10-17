@@ -3,10 +3,10 @@ using UnityEngine.InputSystem;
 
 public class GroundedState : State
 {
-    protected Vector2 smoothMovementInput;
-    private InputAction moveAction;
+    public Vector2 smoothMovementInput;
+    public Vector2 rawInput;
+
     private bool isSprinting = false;
-    private Vector2 rawInput;
     private Vector2 smoothInputRef;
     private float smoothTime = 0.2f;
 
@@ -18,12 +18,6 @@ public class GroundedState : State
     public override void Enter()
     {
         base.Enter();
-
-        if (moveAction == null)
-        {
-            moveAction = character.PlayerInput.actions["Movement"];
-        }
-
         EnableInput();
     }
 
@@ -43,19 +37,18 @@ public class GroundedState : State
     protected override void EnableInput()
     {
         base.EnableInput();
-        moveAction.canceled += HandleMoveInput;
-        moveAction.performed += HandleMoveInput;
+        MInputManager.movementPressed += HandleMoveInput;
     }
 
     protected override void DisableInput()
     {
         base.DisableInput();
-        moveAction.canceled -= HandleMoveInput;
-        moveAction.performed -= HandleMoveInput;
+        MInputManager.movementPressed -= HandleMoveInput;
     }
 
-    private void HandleMoveInput(InputAction.CallbackContext context)
+    private void HandleMoveInput(Vector2 move)
     {
-        rawInput = context.ReadValue<Vector2>().normalized;
+        Debug.Log(move);
+        rawInput = move;
     }
 }

@@ -10,17 +10,19 @@ public class Character : MonoBehaviour
     public float aimSpeed = 6.0f;
     public Rig weaponAimRigLayer;
     public float gravity = -9.8f;
+    public LayerMask groundLayer;
 
     private CharacterController controller;
     private PlayerInput playerInput;
     private float aimSmoothVelocity;
-
+    private Weapon weapon;
     private Vector3 playerVelocity;
     private float verticalVelocity;
     private StateMachine movementStateMachine;
     public MovingState moving;
     public JumpingState jumping;
     public AimingState aiming;
+    public ShootingState shooting;
 
     [System.NonSerialized]
     public Camera mainCam;
@@ -63,22 +65,23 @@ public class Character : MonoBehaviour
         velocityYHash = Animator.StringToHash("VelocityY");
         jumpHash = Animator.StringToHash("Jump");
         groundedHash = Animator.StringToHash("Grounded");
-
+        weapon = GetComponentInChildren<Weapon>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         movementStateMachine = new StateMachine();
         moving = new MovingState(this, movementStateMachine);
         jumping = new JumpingState(this, movementStateMachine);
         aiming = new AimingState(this, movementStateMachine);
+        shooting = new ShootingState(this, movementStateMachine);
         movementStateMachine.Initialize(moving);
+        Debug.Log("Setting player Intut");
+        MInputManager.SharedInstance.SetPlayerInput(playerInput);
     }
 
 
     private void Update()
     {
         movementStateMachine.CurrentState.HandleUpdate();
-
-        Debug.Log(controller.isGrounded);
     }
 
 
@@ -96,7 +99,7 @@ public class Character : MonoBehaviour
 
     public void MoveGround(Vector2 input)
     {
-        if (controller.isGrounded && verticalVelocity < 0)
+        if (IsGrounded() && verticalVelocity < 0)
         {
             verticalVelocity = -2f;
         }
@@ -125,6 +128,23 @@ public class Character : MonoBehaviour
     public void EndAiming()
     {
         weaponAimRigLayer.weight = Mathf.SmoothDamp(weaponAimRigLayer.weight, 0, ref aimSmoothVelocity, Time.deltaTime * aimSpeed);
+    }
+
+    public bool IsGrounded()
+    {
+        Vector3 spherePosition = transform.position;
+        bool grounded = Physics.CheckSphere(spherePosition, 0.28f, groundLayer, QueryTriggerInteraction.Ignore);
+        return grounded;
+    }
+
+    public void StartShooting()
+    {
+        weapon.StartFiring();
+    }
+
+    public void StopShooting()
+    {
+        weapon.StopFiring();
     }
 
 }

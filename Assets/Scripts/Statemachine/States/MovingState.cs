@@ -5,9 +5,11 @@ public class MovingState : GroundedState
 {
     private bool isSprinting;
     private bool isAiming;
+    private bool isShooting;
     private InputAction sprintAction;
     private InputAction jumpAction;
     private InputAction aimAction;
+    private InputAction shootAction;
 
     public MovingState(Character character, StateMachine stateMachine) : base(character, stateMachine)
     {
@@ -20,9 +22,12 @@ public class MovingState : GroundedState
         sprintAction = character.PlayerInput.actions["Sprint"];
         jumpAction = character.PlayerInput.actions["Jump"];
         aimAction = character.PlayerInput.actions["Aim"];
+        shootAction = character.PlayerInput.actions["Shoot"];
+
         sprintAction.performed += HandleSprintInput;
         sprintAction.canceled += HandleSprintInput;
         aimAction.performed += (_) => StartAim();
+        shootAction.performed += HandleShoot;
     }
 
     public override void Exit()
@@ -31,6 +36,7 @@ public class MovingState : GroundedState
         sprintAction.performed -= HandleSprintInput;
         sprintAction.canceled -= HandleSprintInput;
         aimAction.performed -= (_) => StartAim();
+        shootAction.performed -= HandleShoot;
     }
 
     public override void HandleUpdate()
@@ -43,7 +49,16 @@ public class MovingState : GroundedState
         }
         else if (isAiming)
         {
+            character.aiming.smoothMovementInput = this.smoothMovementInput;
+            character.aiming.rawInput = this.rawInput;
             stateMachine.ChangeState(character.aiming);
+        }
+        else if (isShooting)
+        {
+            isShooting = false;
+            character.shooting.smoothMovementInput = this.smoothMovementInput;
+            character.shooting.rawInput = this.rawInput;
+            stateMachine.ChangeState(character.shooting);
         }
     }
 
@@ -69,5 +84,10 @@ public class MovingState : GroundedState
     private void StartAim()
     {
         isAiming = true;
+    }
+
+    private void HandleShoot(InputAction.CallbackContext context)
+    {
+        isShooting = context.ReadValue<float>() == 1;
     }
 }

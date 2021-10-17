@@ -23,7 +23,7 @@ public class JumpingState : State
     public override void HandlePhysicsUpdate()
     {
         base.HandlePhysicsUpdate();
-        if (character.Grounded)
+        if (character.IsGrounded())
         {
             character.animator.SetTrigger(character.groundedHash);
             stateMachine.GoBackToPrevState();
