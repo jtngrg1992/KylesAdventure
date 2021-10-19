@@ -49,6 +49,8 @@ public class CharacterStateMachine : MStateMachine
         mainCam = Camera.main;
         velocityXHash = Animator.StringToHash("VelocityX");
         velocityYHash = Animator.StringToHash("VelocityY");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     protected override BaseState GetInitialState()

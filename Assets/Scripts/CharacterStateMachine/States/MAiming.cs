@@ -34,9 +34,9 @@ public class MAiming : MGrounded
         m_SM.weaponAimRigLayer.weight = smoothValue;
 
 
-        Debug.Log(smoothValue);
+        float diff = smoothValue - 0;
 
-        if (smoothValue < Mathf.Epsilon && smoothValue > -Mathf.Epsilon)
+        if (diff < .1f && target == 0)
         {
             Debug.Log("sdsds");
             m_SM.UnWind();
