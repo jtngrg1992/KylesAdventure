@@ -11,11 +11,11 @@ class MInputManager
     private PlayerInput playerInput;
     private static MInputManager instance;
 
-    public InputAction moveAction;
-    public InputAction sprintAction;
-    public InputAction jumpAction;
-    public InputAction aimAction;
-    public InputAction shootAction;
+    private InputAction moveAction;
+    private InputAction sprintAction;
+    private InputAction jumpAction;
+    private InputAction aimAction;
+    private InputAction shootAction;
 
     public static event NotifyMovement movementPressed;
     public static event NotifyAction sprintEngaged;
@@ -79,36 +79,36 @@ class MInputManager
 
     private void HandleSprintStart()
     {
-        sprintEngaged.Invoke();
+        sprintEngaged?.Invoke();
     }
 
     private void HandleSprintEnd()
     {
-        sprintDisengaged.Invoke();
+        sprintDisengaged?.Invoke();
     }
 
     private void HandleJump()
     {
-        jumpTriggered.Invoke();
+        jumpTriggered?.Invoke();
     }
 
     private void HandleAim()
     {
-        aimEngaged.Invoke();
+        aimEngaged?.Invoke();
     }
 
     private void HandleAimCancel()
     {
-        aimCancelled.Invoke();
+        aimCancelled?.Invoke();
     }
 
     private void HandleShootStart()
     {
-        shootingStarted.Invoke();
+        shootingStarted?.Invoke();
     }
 
     private void HandleShootEnd()
     {
-        shootingCancelled.Invoke();
+        shootingCancelled?.Invoke();
     }
 }

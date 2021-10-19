@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
-[RequireComponent(typeof(PlayerInput))]
 public class SwitchVCam : MonoBehaviour
 {
     [SerializeField]
