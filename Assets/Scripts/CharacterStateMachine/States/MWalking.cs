@@ -3,7 +3,6 @@ using UnityEngine;
 public class MWalking : MGrounded
 {
     CharacterStateMachine m_SM;
-
     private bool isSprinting = false;
 
     public MWalking(MStateMachine stateMachine) : base("Walking", stateMachine)
@@ -16,12 +15,14 @@ public class MWalking : MGrounded
         base.Enter();
         isSprinting = false;
         MInputManager.sprintEngaged += HandleSprintPress;
+
     }
 
     public override void Exit()
     {
         base.Exit();
         MInputManager.sprintEngaged -= HandleSprintPress;
+
     }
 
     public override void Update()
@@ -37,7 +38,6 @@ public class MWalking : MGrounded
         }
         else if (isSprinting)
         {
-            // transition to sprinting state
             m_SM.ActivateState(m_SM.sprintingState);
         }
     }

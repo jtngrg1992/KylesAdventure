@@ -16,13 +16,17 @@ public class CharacterStateMachine : MStateMachine
     [HideInInspector]
     public int velocityYHash;
     [HideInInspector]
+    public int jumpingHash;
+    [HideInInspector]
+    public int groundedHash;
+    [HideInInspector]
     public MIdle idleState;
     [HideInInspector]
     public MWalking walkingState;
     [HideInInspector]
     public MSprinting sprintingState;
     [HideInInspector]
-    public MAiming aimingState;
+    public MJumping jumpingState;
     [HideInInspector]
     public Vector2 movementInput;
     [HideInInspector]
@@ -31,6 +35,10 @@ public class CharacterStateMachine : MStateMachine
     public Vector3 playerVelocity;
     [HideInInspector]
     public Animator animator;
+    [HideInInspector]
+    public bool isAiming = false;
+    [HideInInspector]
+    public bool shouldJump = false;
 
     private CharacterController controller;
     public CharacterController Controller { get { return controller; } }
@@ -43,12 +51,14 @@ public class CharacterStateMachine : MStateMachine
         idleState = new MIdle(this);
         walkingState = new MWalking(this);
         sprintingState = new MSprinting(this);
-        aimingState = new MAiming(this);
+        jumpingState = new MJumping(this);
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         mainCam = Camera.main;
         velocityXHash = Animator.StringToHash("VelocityX");
         velocityYHash = Animator.StringToHash("VelocityY");
+        jumpingHash = Animator.StringToHash("Jump");
+        groundedHash = Animator.StringToHash("Grounded");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }

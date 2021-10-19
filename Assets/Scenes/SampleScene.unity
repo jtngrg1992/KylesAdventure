@@ -14125,7 +14125,7 @@ PrefabInstance:
     - target: {fileID: 6015786730748652804, guid: 549e1b726ca1c48beabe871ef11bf067,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.019635677
+      value: -0.16511053
       objectReference: {fileID: 0}
     - target: {fileID: 6015786730748652804, guid: 549e1b726ca1c48beabe871ef11bf067,
         type: 3}
@@ -15304,18 +15304,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 8407447325600169640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320be73499b4b4ce28cba59618de15d3, type: 3}
+  m_Script: {fileID: 11500000, guid: f4db1493dddcc4bd99423f8d6a3e9c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 2
+  walkingSpeed: 2
   sprintMultiplier: 3
   rotationSpeed: 20
-  aimSpeed: 0
+  aimSpeed: 6
+  gravity: -15
+  movementInputSmoothTime: 0.2
   weaponAimRigLayer: {fileID: 316360258}
-  gravity: -9.8
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  velocityXHash: 0
+  velocityYHash: 0
+  jumpingHash: 0
+  groundedHash: 0
+  movementInput: {x: 0, y: 0}
+  verticalVelocity: 0
+  playerVelocity: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
+  isAiming: 0
+  shouldJump: 0
 --- !u!4 &8445645787861733559
 Transform:
   m_ObjectHideFlags: 0
