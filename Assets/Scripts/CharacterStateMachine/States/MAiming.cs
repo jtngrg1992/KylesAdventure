@@ -5,6 +5,7 @@ public class MAiming : MGrounded
 
     private float aimSmoothRef;
     public BaseState fallbackState;
+    private float currentTarget = 0.0f;
 
     public MAiming(string name, MStateMachine stateMachine) : base(name, stateMachine) { }
 
@@ -39,10 +40,10 @@ public class MAiming : MGrounded
         }
 
         float target = m_SM.isAiming ? 1 : 0;
-
         float smoothValue = Mathf.SmoothDamp(m_SM.weaponAimRigLayer.weight, target, ref aimSmoothRef, m_SM.aimSpeed * Time.deltaTime);
         float clampedSmoothValue = Mathf.Clamp(smoothValue, 0, 1);
         m_SM.weaponAimRigLayer.weight = clampedSmoothValue;
+        currentTarget = target;
 
         if (clampedSmoothValue < 0.01f)
         {

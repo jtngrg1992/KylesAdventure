@@ -21,16 +21,20 @@ public class MFiring : MAiming
         base.Enter();
         isFiring = true;
         MInputManager.shootingCancelled += HandleFiringCancel;
+        m_SM.weapon.StartFiring();
     }
 
-    public override void PhysicsUpdate()
+    public override void Update()
     {
-        base.PhysicsUpdate();
+        base.Update();
         if (!isFiring)
         {
-            m_SM.weapon.isFiring = false;
+            m_SM.weapon.StopFiring();
         }
-        m_SM.weapon.isFiring = this.isFiring;
+        else
+        {
+            m_SM.weapon.UpdateFiring(Time.deltaTime);
+        }
     }
 
     private void HandleFiringCancel()
