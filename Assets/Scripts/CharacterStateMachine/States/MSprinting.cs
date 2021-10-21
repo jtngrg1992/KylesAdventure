@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class MSprinting : MGrounded
 {
-    private CharacterStateMachine m_Sm;
-    private bool isSprinting;
-
-    public MSprinting(MStateMachine stateMachine) : base("Sprinting", stateMachine)
+    private bool isSprinting
     {
-        m_Sm = (CharacterStateMachine)stateMachine;
+        get
+        {
+            return m_SM.isSprinting;
+        }
+        set
+        {
+            m_SM.isSprinting = value;
+        }
     }
+
+    public MSprinting(MStateMachine stateMachine) : base("Sprinting", stateMachine) { }
 
     public override void Enter()
     {
@@ -16,12 +22,14 @@ public class MSprinting : MGrounded
         isSprinting = true;
 
         MInputManager.sprintDisengaged += HandleSprintButtonRelease;
+        MInputManager.aimEngaged += HandleAimEngaged;
     }
 
     public override void Exit()
     {
         base.Exit();
         MInputManager.sprintDisengaged -= HandleSprintButtonRelease;
+        MInputManager.aimEngaged -= HandleAimEngaged;
     }
 
     public override void Update()
@@ -30,12 +38,18 @@ public class MSprinting : MGrounded
 
         if (!isSprinting)
         {
-            m_Sm.ActivateState(m_Sm.walkingState);
+            m_SM.ActivateState(m_SM.walkingState);
         }
     }
 
     private void HandleSprintButtonRelease()
     {
         isSprinting = false;
+    }
+
+    private void HandleAimEngaged()
+    {
+        m_SM.aimingState.fallbackState = this;
+        m_SM.ActivateState(m_SM.aimingState);
     }
 }

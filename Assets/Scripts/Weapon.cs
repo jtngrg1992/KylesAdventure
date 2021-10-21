@@ -20,10 +20,23 @@ public class Weapon : MonoBehaviour
     private Ray ray;
     private RaycastHit hitInfo;
 
+
+    private void Update()
+    {
+        if (isFiring)
+        {
+            StartFiring();
+        }
+        else
+        {
+            StopFiring();
+        }
+    }
+
+
     public void StartFiring()
     {
         muzzleFlash.Play();
-        isFiring = true;
         ray.origin = raycastOrigin.position;
         ray.direction = raycastDestination.position - raycastOrigin.position;
 
@@ -41,11 +54,6 @@ public class Weapon : MonoBehaviour
 
     public void StopFiring()
     {
-        if (!isFiring)
-        {
-            return;
-        }
         muzzleFlash.Stop();
-        isFiring = false;
     }
 }

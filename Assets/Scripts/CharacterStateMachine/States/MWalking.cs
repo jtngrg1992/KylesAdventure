@@ -2,19 +2,26 @@ using UnityEngine;
 
 public class MWalking : MGrounded
 {
-    CharacterStateMachine m_SM;
-    private bool isSprinting = false;
-
-    public MWalking(MStateMachine stateMachine) : base("Walking", stateMachine)
+    private bool isSprinting
     {
-        m_SM = (CharacterStateMachine)stateMachine;
+        get
+        {
+            return m_SM.isSprinting;
+        }
+        set
+        {
+            m_SM.isSprinting = value;
+        }
     }
+
+    public MWalking(MStateMachine stateMachine) : base("Walking", stateMachine) { }
 
     public override void Enter()
     {
         base.Enter();
         isSprinting = false;
         MInputManager.sprintEngaged += HandleSprintPress;
+        MInputManager.aimEngaged += HandleAimEngaged;
 
     }
 
@@ -22,6 +29,7 @@ public class MWalking : MGrounded
     {
         base.Exit();
         MInputManager.sprintEngaged -= HandleSprintPress;
+        MInputManager.aimEngaged -= HandleAimEngaged;
 
     }
 
@@ -44,5 +52,11 @@ public class MWalking : MGrounded
     private void HandleSprintPress()
     {
         isSprinting = true;
+    }
+
+    private void HandleAimEngaged()
+    {
+        m_SM.aimingState.fallbackState = this;
+        m_SM.ActivateState(m_SM.aimingState);
     }
 }

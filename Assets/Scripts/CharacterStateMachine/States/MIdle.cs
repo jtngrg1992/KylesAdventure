@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class MIdle : MGrounded
 {
-    private CharacterStateMachine m_SM;
     private bool isMoving = false;
 
-    public MIdle(MStateMachine stateMachine) : base("Idle", stateMachine)
-    {
-        m_SM = (CharacterStateMachine)stateMachine;
-    }
+    public MIdle(MStateMachine stateMachine) : base("Idle", stateMachine) { }
 
     public override void Enter()
     {
         base.Enter();
         isMoving = false;
+        MInputManager.aimEngaged += HandleAimEngaged;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        MInputManager.aimEngaged -= HandleAimEngaged;
     }
 
     public override void Update()
@@ -26,5 +29,11 @@ public class MIdle : MGrounded
         {
             m_SM.ActivateState(m_SM.walkingState);
         }
+    }
+
+    private void HandleAimEngaged()
+    {
+        m_SM.aimingState.fallbackState = this;
+        m_SM.ActivateState(m_SM.aimingState);
     }
 }

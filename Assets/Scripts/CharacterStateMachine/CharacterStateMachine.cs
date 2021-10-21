@@ -3,6 +3,7 @@ using UnityEngine.Animations.Rigging;
 
 public class CharacterStateMachine : MStateMachine
 {
+    #region Serializable Config Values 
     public float walkingSpeed = 2.0f;
     public float sprintMultiplier = 3.0f;
     public float rotationSpeed = 20.0f;
@@ -14,7 +15,11 @@ public class CharacterStateMachine : MStateMachine
     public float groundedRadius = 0.28f;
     public LayerMask groundLayers;
     public float jumpHeight = 2f;
+    public Weapon weapon;
+    #endregion
 
+
+    #region Animator Variables
     [HideInInspector]
     public int velocityXHash;
     [HideInInspector]
@@ -23,6 +28,10 @@ public class CharacterStateMachine : MStateMachine
     public int jumpingHash;
     [HideInInspector]
     public int groundedHash;
+    #endregion
+
+
+    #region StateMachine States
     [HideInInspector]
     public MIdle idleState;
     [HideInInspector]
@@ -31,6 +40,13 @@ public class CharacterStateMachine : MStateMachine
     public MSprinting sprintingState;
     [HideInInspector]
     public MJumping jumpingState;
+    [HideInInspector]
+    public MAiming aimingState;
+    [HideInInspector]
+    public MFiring firingState;
+    #endregion
+
+    #region State Variables
     [HideInInspector]
     public Vector2 movementInput;
     [HideInInspector]
@@ -43,12 +59,19 @@ public class CharacterStateMachine : MStateMachine
     public bool isAiming = false;
     [HideInInspector]
     public bool shouldJump = false;
+    [HideInInspector]
+    public bool isSprinting = false;
+    [HideInInspector]
+    public bool isFiring = false;
+    #endregion
 
+    #region StateMachine Attributes
     private CharacterController controller;
     public CharacterController Controller { get { return controller; } }
     private Camera mainCam;
     public Camera MainCam { get { return mainCam; } }
     public BaseState ActiveState { get { return currentState; } }
+    #endregion
 
     private void Awake()
     {
@@ -56,13 +79,18 @@ public class CharacterStateMachine : MStateMachine
         walkingState = new MWalking(this);
         sprintingState = new MSprinting(this);
         jumpingState = new MJumping(this);
+        aimingState = new MAiming("Aiming", this);
+        firingState = new MFiring(this);
+
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+
         mainCam = Camera.main;
         velocityXHash = Animator.StringToHash("VelocityX");
         velocityYHash = Animator.StringToHash("VelocityY");
         jumpingHash = Animator.StringToHash("Jump");
         groundedHash = Animator.StringToHash("Grounded");
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }

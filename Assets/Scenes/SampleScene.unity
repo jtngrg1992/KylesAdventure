@@ -1600,7 +1600,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0.006283144, y: -0, z: -0, w: 0.9999803}
-  m_LocalPosition: {x: 0.03686714, y: -0.13604534, z: 3.6987917}
+  m_LocalPosition: {x: -0.16484088, y: -0.13604534, z: 3.6987917}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1625,10 +1625,10 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 0
-  m_BlendUpdateMethod: 0
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 6
+    m_Style: 3
     m_Time: 0.15
     m_CustomCurve:
       serializedVersion: 2
@@ -14216,7 +14216,7 @@ PrefabInstance:
     - target: {fileID: 6015786730748652804, guid: 549e1b726ca1c48beabe871ef11bf067,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.16594553
+      value: -0.16484088
       objectReference: {fileID: 0}
     - target: {fileID: 6015786730748652804, guid: 549e1b726ca1c48beabe871ef11bf067,
         type: 3}
@@ -14435,7 +14435,7 @@ PrefabInstance:
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.9816122
+      value: 0.8481457
       objectReference: {fileID: 0}
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}
@@ -14445,7 +14445,7 @@ PrefabInstance:
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.6358414
+      value: 4.5801206
       objectReference: {fileID: 0}
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}
@@ -15411,6 +15411,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   jumpHeight: 2
+  weapon: {fileID: 1974352833}
   velocityXHash: 0
   velocityYHash: 0
   jumpingHash: 0
@@ -15421,6 +15422,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   isAiming: 0
   shouldJump: 0
+  isSprinting: 0
+  isFiring: 0
 --- !u!4 &8445645787861733559
 Transform:
   m_ObjectHideFlags: 0
