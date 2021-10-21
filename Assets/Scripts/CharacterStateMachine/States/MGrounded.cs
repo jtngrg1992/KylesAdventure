@@ -31,7 +31,7 @@ public class MGrounded : BaseState
 
             m_SM.movementInput = Vector2.SmoothDamp(m_SM.movementInput, rawMovement, ref movementRef, m_SM.movementInputSmoothTime);
 
-            if (m_SM.Controller.isGrounded && m_SM.verticalVelocity < 0)
+            if (m_SM.Grounded() && m_SM.verticalVelocity < 0)
             {
                 m_SM.verticalVelocity = -2f;
             }
@@ -80,7 +80,7 @@ public class MGrounded : BaseState
 
     private void HandleJump()
     {
-        if (m_SM.Controller.isGrounded)
+        if (m_SM.Grounded())
         {
             m_SM.shouldJump = true;
         }

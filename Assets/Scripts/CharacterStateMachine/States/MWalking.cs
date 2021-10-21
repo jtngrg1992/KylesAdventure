@@ -33,7 +33,6 @@ public class MWalking : MGrounded
 
         if (!isMoving)
         {
-            Debug.Log(Mathf.Epsilon);
             m_SM.ActivateState(m_SM.idleState);
         }
         else if (isSprinting)

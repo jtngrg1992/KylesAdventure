@@ -48,7 +48,6 @@ public class GroundedState : State
 
     private void HandleMoveInput(Vector2 move)
     {
-        Debug.Log(move);
         rawInput = move;
     }
 }

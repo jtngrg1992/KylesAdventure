@@ -10,6 +10,10 @@ public class CharacterStateMachine : MStateMachine
     public float gravity = -9.8f;
     public float movementInputSmoothTime = 0.2f;
     public Rig weaponAimRigLayer;
+    public float groundOffset = -0.14f;
+    public float groundedRadius = 0.28f;
+    public LayerMask groundLayers;
+    public float jumpHeight = 2f;
 
     [HideInInspector]
     public int velocityXHash;
@@ -66,5 +70,11 @@ public class CharacterStateMachine : MStateMachine
     protected override BaseState GetInitialState()
     {
         return idleState;
+    }
+
+    public bool Grounded()
+    {
+        bool isGrounded = Physics.Raycast(transform.position, -Vector3.up, 0.1f);
+        return isGrounded;
     }
 }
