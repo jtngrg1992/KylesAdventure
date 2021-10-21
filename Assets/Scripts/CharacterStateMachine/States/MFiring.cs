@@ -23,20 +23,13 @@ public class MFiring : MAiming
         MInputManager.shootingCancelled += HandleFiringCancel;
     }
 
-
-    public override void Update()
+    public override void PhysicsUpdate()
     {
-        base.Update();
-
+        base.PhysicsUpdate();
         if (!isFiring)
         {
             m_SM.weapon.isFiring = false;
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
         m_SM.weapon.isFiring = this.isFiring;
     }
 

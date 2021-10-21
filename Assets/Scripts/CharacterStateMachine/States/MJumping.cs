@@ -15,11 +15,13 @@ public class MJumping : BaseState
         m_SM.animator.SetTrigger(m_SM.jumpingHash);
         m_SM.verticalVelocity += jumpHeight;
         m_SM.shouldJump = false;
+
+
     }
 
-    public override void PhysicsUpdate()
+    public override void Update()
     {
-        base.PhysicsUpdate();
+        base.Update();
 
         m_SM.Controller.Move((m_SM.playerVelocity + new Vector3(0, m_SM.verticalVelocity, 0)) * Time.deltaTime);
 
@@ -30,5 +32,6 @@ public class MJumping : BaseState
         }
 
         m_SM.verticalVelocity += -15 * Time.deltaTime;
+
     }
 }

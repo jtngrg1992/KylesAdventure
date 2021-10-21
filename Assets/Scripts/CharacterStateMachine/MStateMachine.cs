@@ -32,6 +32,11 @@ public class MStateMachine : MonoBehaviour
         currentState.PhysicsUpdate();
     }
 
+    void LateUpdate()
+    {
+        currentState.LateUpdate();
+    }
+
 
     public void ActivateState(BaseState state)
     {

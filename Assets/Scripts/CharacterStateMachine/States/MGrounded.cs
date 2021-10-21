@@ -21,17 +21,21 @@ public class MGrounded : BaseState
         {
             m_SM.ActivateState(m_SM.jumpingState);
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
 
         HandleMoveLogic();
     }
 
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
+        float cameraRotationAngle = m_SM.MainCam.transform.rotation.eulerAngles.y;
+        Quaternion targetRotation = Quaternion.Euler(0, cameraRotationAngle, 0);
+        m_SM.transform.rotation = Quaternion.Lerp(m_SM.transform.rotation, targetRotation, Time.deltaTime * m_SM.rotationSpeed);
+    }
+
     private void HandleMoveLogic()
     {
+
         multiplier = m_SM.isSprinting ? m_SM.sprintMultiplier : 1f;
 
         m_SM.movementInput = Vector2.SmoothDamp(m_SM.movementInput, rawMovement, ref movementRef, m_SM.movementInputSmoothTime);
@@ -48,14 +52,9 @@ public class MGrounded : BaseState
         movementVelociy *= m_SM.walkingSpeed;
         m_SM.playerVelocity = movementVelociy;
         m_SM.verticalVelocity += m_SM.gravity * Time.deltaTime;
-
         m_SM.animator.SetFloat(m_SM.velocityXHash, m_SM.movementInput.x * multiplier);
         m_SM.animator.SetFloat(m_SM.velocityYHash, m_SM.movementInput.y * multiplier);
         m_SM.Controller.Move((m_SM.playerVelocity + new Vector3(0, m_SM.verticalVelocity, 0)) * Time.deltaTime);
-
-        float cameraRotationAngle = m_SM.MainCam.transform.rotation.eulerAngles.y;
-        Quaternion targetRotation = Quaternion.Euler(0, cameraRotationAngle, 0);
-        m_SM.transform.rotation = Quaternion.Lerp(m_SM.transform.rotation, targetRotation, Time.deltaTime * m_SM.rotationSpeed);
     }
 
     private void HandleMovementInput(Vector2 move)

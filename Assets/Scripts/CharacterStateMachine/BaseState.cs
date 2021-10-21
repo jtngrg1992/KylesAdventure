@@ -17,6 +17,8 @@ public class BaseState
 
     public virtual void PhysicsUpdate() { }
 
+    public virtual void LateUpdate() { }
+
     public virtual void Enter() { }
 
     public virtual void Exit() { }

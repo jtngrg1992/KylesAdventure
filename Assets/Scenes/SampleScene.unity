@@ -1628,7 +1628,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 3
+    m_Style: 1
     m_Time: 0.15
     m_CustomCurve:
       serializedVersion: 2
@@ -3425,6 +3425,7 @@ MonoBehaviour:
     type: 3}
   tracerPrefab: {fileID: 4993044837984080376, guid: 85762215797af4c58a86a6aea93e0da5,
     type: 3}
+  fireRate: 25
   isFiring: 0
 --- !u!1001 &1981732129
 PrefabInstance:
@@ -3515,6 +3516,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50a0925b0c22af146a2d15615f815a1c, type: 3}
+--- !u!1 &1994586167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1994586168}
+  m_Layer: 0
+  m_Name: CameraLookAt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1994586168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994586167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.082, y: 1.351, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4825071627175873723}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1743299763891557
 GameObject:
   m_ObjectHideFlags: 0
@@ -13963,7 +13995,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 8427a24e70e394c39907e3c916b54732, type: 3}
   m_Controller: {fileID: 9100000, guid: f469d91767ec5410daaa98f6acde40be, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 1
+  m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -14206,7 +14238,12 @@ PrefabInstance:
     - target: {fileID: 5534765516061705300, guid: 549e1b726ca1c48beabe871ef11bf067,
         type: 3}
       propertyPath: m_VerticalAxis.m_MaxSpeed
-      value: 0.3
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5534765516061705300, guid: 549e1b726ca1c48beabe871ef11bf067,
+        type: 3}
+      propertyPath: m_HorizontalAxis.m_MaxSpeed
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6015786730748652804, guid: 549e1b726ca1c48beabe871ef11bf067,
         type: 3}
@@ -14325,6 +14362,7 @@ Transform:
   - {fileID: 316360257}
   - {fileID: 1305724948}
   - {fileID: 358015417}
+  - {fileID: 1994586168}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14515,7 +14553,7 @@ PrefabInstance:
     - target: {fileID: 6054111345061368053, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}
       propertyPath: m_CollideAgainst.m_Bits
-      value: 256
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 6660607571838324172, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}
@@ -15375,8 +15413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RigLayers:
-  - m_Rig: {fileID: 358015418}
-    m_Active: 1
   - m_Rig: {fileID: 1305724949}
     m_Active: 1
   - m_Rig: {fileID: 1737399140}

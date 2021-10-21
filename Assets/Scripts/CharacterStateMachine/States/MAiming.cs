@@ -37,11 +37,6 @@ public class MAiming : MGrounded
             m_SM.ActivateState(m_SM.firingState);
             m_SM.firingState.fallbackState = this.fallbackState;
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
 
         float target = m_SM.isAiming ? 1 : 0;
 

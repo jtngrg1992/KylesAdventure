@@ -13,28 +13,36 @@ public class Weapon : MonoBehaviour
     private ParticleSystem impactPrefab;
     [SerializeField]
     private TrailRenderer tracerPrefab;
-
+    [SerializeField]
+    private int fireRate = 25;
 
     public bool isFiring = false;
 
     private Ray ray;
+    private float accumulatedTime;
     private RaycastHit hitInfo;
 
 
-    private void Update()
+    public void UpdateFiring(float deltaTime)
     {
-        if (isFiring)
+        accumulatedTime += deltaTime;
+        float fireInterval = 1 / fireRate;
+
+        while (accumulatedTime > 0.0f)
         {
-            StartFiring();
-        }
-        else
-        {
-            StopFiring();
+            FireBullet();
+            accumulatedTime -= fireInterval;
         }
     }
 
 
     public void StartFiring()
+    {
+        accumulatedTime = 0.0f;
+        FireBullet();
+    }
+
+    private void FireBullet()
     {
         muzzleFlash.Play();
         ray.origin = raycastOrigin.position;
