@@ -72,9 +72,9 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _UVSec: 0
+    - _UVSec: 1
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 0.9150943, g: 0.49494848, b: 0.06474723, a: 1}
-    - _EmissionColor: {r: 0.4490196, g: 0.11176471, b: 0.04117647, a: 1}
+    - _EmissionColor: {r: 7.2303042, g: 1.6507543, b: 1.0894979, a: 1}
   m_BuildTextureStacks: []
