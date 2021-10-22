@@ -27,11 +27,7 @@ public class MFiring : MAiming
     public override void Update()
     {
         base.Update();
-        if (!isFiring)
-        {
-            m_SM.weapon.StopFiring();
-        }
-        else
+        if (isFiring)
         {
             m_SM.weapon.UpdateFiring(Time.deltaTime);
         }

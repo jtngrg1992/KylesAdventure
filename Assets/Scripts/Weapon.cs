@@ -41,11 +41,6 @@ public class Weapon : MonoBehaviour
         FireBullet();
     }
 
-    public void StopFiring()
-    {
-        muzzleFlash.Stop();
-    }
-
     public void UpdateFiring(float deltaTime)
     {
         accumulatedTime += deltaTime;
