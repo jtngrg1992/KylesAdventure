@@ -1600,7 +1600,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0.006283144, y: -0, z: -0, w: 0.9999803}
-  m_LocalPosition: {x: -0.16484088, y: -0.13604534, z: 3.6987917}
+  m_LocalPosition: {x: -0.16574365, y: -0.13604534, z: 3.6987917}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3426,7 +3426,8 @@ MonoBehaviour:
   tracerPrefab: {fileID: 4993044837984080376, guid: 85762215797af4c58a86a6aea93e0da5,
     type: 3}
   fireRate: 25
-  isFiring: 0
+  bulletSpeed: 500
+  bulletDrop: 1
 --- !u!1001 &1981732129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4492,7 +4493,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
@@ -14253,7 +14254,7 @@ PrefabInstance:
     - target: {fileID: 6015786730748652804, guid: 549e1b726ca1c48beabe871ef11bf067,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.16484088
+      value: -0.16574365
       objectReference: {fileID: 0}
     - target: {fileID: 6015786730748652804, guid: 549e1b726ca1c48beabe871ef11bf067,
         type: 3}
@@ -14473,7 +14474,7 @@ PrefabInstance:
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8481457
+      value: 0.84754837
       objectReference: {fileID: 0}
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}
@@ -14483,7 +14484,7 @@ PrefabInstance:
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.5801206
+      value: 4.579871
       objectReference: {fileID: 0}
     - target: {fileID: 58136030910235262, guid: 824f29126baf24a7880344096eb50dc0,
         type: 3}

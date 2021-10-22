@@ -35,6 +35,8 @@ public class MFiring : MAiming
         {
             m_SM.weapon.UpdateFiring(Time.deltaTime);
         }
+
+        m_SM.weapon.UpdateBullets(Time.deltaTime);
     }
 
     private void HandleFiringCancel()
