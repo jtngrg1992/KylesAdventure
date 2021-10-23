@@ -27,7 +27,8 @@ public class Weapon : MonoBehaviour
     private float bulletSpeed = 1000.0f;
     [SerializeField]
     private float bulletDrop = 0.0f;
-
+    [SerializeField]
+    public AnimationClip weaponAnimation;
 
     private Ray ray;
     private float accumulatedTime;

@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-
+using UnityEditor.Animations;
 public class ActiveWeapon : MonoBehaviour
 {
     public Transform firingTarget;
     public Transform weaponHolder;
+    public Transform weaponPoseRelaxed;
+    public Transform weaponPoseAiming;
+    public Transform leftGrip;
+    public Transform rightGrip;
     public Rig handIKRig;
 
     Weapon weapon;
@@ -53,5 +57,12 @@ public class ActiveWeapon : MonoBehaviour
     public void UpdateBullets(float deltaTime)
     {
         weapon.UpdateBullets(deltaTime);
+    }
+
+    [ContextMenu("Save Weapon Pose")]
+    void SaveWeaponPose()
+    {
+        GameObjectRecorder recorder = new GameObjectRecorder(gameObject);
+        // recorder.BindComponentsOfType<Transform>(weaponHolder)
     }
 }

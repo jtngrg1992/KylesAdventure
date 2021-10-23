@@ -172,6 +172,7 @@ MonoBehaviour:
   fireRate: 25
   bulletSpeed: 500
   bulletDrop: 1
+  weaponAnimation: {fileID: 7400000, guid: 1fca540e6145e44898d0effbfade44fd, type: 2}
 --- !u!1 &7589709775693166390
 GameObject:
   m_ObjectHideFlags: 0
