@@ -4,6 +4,7 @@ using UnityEngine.Animations.Rigging;
 public class ActiveWeapon : MonoBehaviour
 {
     public Transform firingTarget;
+    public Transform weaponHolder;
     public Rig handIKRig;
 
     Weapon weapon;
@@ -25,10 +26,17 @@ public class ActiveWeapon : MonoBehaviour
         }
     }
 
-    private void Equip(Weapon newWeapon)
+    public void Equip(Weapon newWeapon)
     {
+        if (this.weapon)
+        {
+            Destroy(this.weapon.gameObject);
+        }
         weapon = newWeapon;
         weapon.raycastDestination = firingTarget;
+        weapon.transform.parent = weaponHolder;
+        weapon.transform.localPosition = Vector3.zero;
+        weapon.transform.localRotation = Quaternion.identity;
         handIKRig.weight = 1;
     }
 
