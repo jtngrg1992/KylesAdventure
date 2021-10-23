@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private Transform raycastOrigin;
     [SerializeField]
-    private Transform raycastDestination;
+    public Transform raycastDestination;
     [SerializeField]
     private ParticleSystem impactPrefab;
     [SerializeField]

@@ -15,7 +15,6 @@ public class CharacterStateMachine : MStateMachine
     public float groundedRadius = 0.28f;
     public LayerMask groundLayers;
     public float jumpHeight = 2f;
-    public Weapon weapon;
     #endregion
 
 
@@ -71,6 +70,7 @@ public class CharacterStateMachine : MStateMachine
     private Camera mainCam;
     public Camera MainCam { get { return mainCam; } }
     public BaseState ActiveState { get { return currentState; } }
+    public ActiveWeapon weapon;
     #endregion
 
     private void Awake()
@@ -84,6 +84,7 @@ public class CharacterStateMachine : MStateMachine
 
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        weapon = GetComponent<ActiveWeapon>();
 
         mainCam = Camera.main;
         velocityXHash = Animator.StringToHash("VelocityX");
