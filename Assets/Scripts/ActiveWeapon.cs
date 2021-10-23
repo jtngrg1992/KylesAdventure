@@ -12,10 +12,14 @@ public class ActiveWeapon : MonoBehaviour
     public Rig handIKRig;
 
     Weapon weapon;
+    Animator animator;
+    AnimatorOverrideController animationOverride;
 
     void Awake()
     {
         Weapon existingWeapon = GetComponentInChildren<Weapon>();
+        animator = GetComponent<Animator>();
+        animationOverride = animator.runtimeAnimatorController as AnimatorOverrideController;
         if (existingWeapon)
         {
             Equip(existingWeapon);
@@ -27,6 +31,7 @@ public class ActiveWeapon : MonoBehaviour
         if (weapon == null)
         {
             handIKRig.weight = 0;
+            animator.SetLayerWeight(1, 0.0f);
         }
     }
 
@@ -42,6 +47,14 @@ public class ActiveWeapon : MonoBehaviour
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
         handIKRig.weight = 1;
+        animator.SetLayerWeight(1, 1.0f);
+
+        Invoke(nameof(SetAnimationOverrideDelayed), 0.001f);
+    }
+
+    void SetAnimationOverrideDelayed()
+    {
+        animationOverride["weapon_anim_empty"] = weapon.weaponAnimationRelaxed;
     }
 
     public void StartFiring()
@@ -59,10 +72,27 @@ public class ActiveWeapon : MonoBehaviour
         weapon.UpdateBullets(deltaTime);
     }
 
-    [ContextMenu("Save Weapon Pose")]
-    void SaveWeaponPose()
+    void GrabClip(Transform targetWeaponPose)
     {
         GameObjectRecorder recorder = new GameObjectRecorder(gameObject);
-        // recorder.BindComponentsOfType<Transform>(weaponHolder)
+        recorder.BindComponentsOfType<Transform>(weaponHolder.gameObject, false);
+        recorder.BindComponentsOfType<Transform>(targetWeaponPose.gameObject, false);
+        recorder.BindComponentsOfType<Transform>(leftGrip.gameObject, false);
+        recorder.BindComponentsOfType<Transform>(rightGrip.gameObject, false);
+        recorder.TakeSnapshot(0.0f);
+        recorder.SaveToClip(weapon.weaponAnimationRelaxed);
     }
+
+    [ContextMenu("Save Relaxed Weapon Pose")]
+    void SaveRelaxedWeaponPose()
+    {
+        GrabClip(weaponPoseRelaxed);
+    }
+
+    [ContextMenu("Saved Aiming Weapon Pose")]
+    void SaveAimingWeaponPose()
+    {
+        GrabClip(weaponPoseAiming);
+    }
+
 }
