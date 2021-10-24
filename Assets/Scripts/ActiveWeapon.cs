@@ -3,14 +3,20 @@ using UnityEngine.Animations.Rigging;
 using UnityEditor.Animations;
 public class ActiveWeapon : MonoBehaviour
 {
+    public enum WeaponType
+    {
+        Primary,
+        Secondary
+    }
+
     public Transform firingTarget;
-    public Transform weaponHolder;
     public Transform weaponPoseRelaxed;
     public Transform weaponPoseAiming;
     public Transform leftGrip;
     public Transform rightGrip;
     public Animator rigController;
-
+    public Transform primaryWeaponHolder;
+    public Transform secondaryWeaponHolder;
 
     Weapon weapon;
     int holsterHash;
@@ -34,7 +40,16 @@ public class ActiveWeapon : MonoBehaviour
         }
         weapon = newWeapon;
         weapon.raycastDestination = firingTarget;
-        weapon.transform.parent = weaponHolder;
+
+        switch (weapon.weaponType)
+        {
+            case WeaponType.Primary:
+                weapon.transform.parent = primaryWeaponHolder;
+                break;
+            case WeaponType.Secondary:
+                weapon.transform.parent = secondaryWeaponHolder;
+                break;
+        }
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
         rigController.Play($"equip_{weapon.weaponName.ToLower()}");
@@ -72,17 +87,6 @@ public class ActiveWeapon : MonoBehaviour
         {
             weapon.UpdateBullets(deltaTime);
         }
-    }
-
-    void GrabClip(Transform targetWeaponPose)
-    {
-        GameObjectRecorder recorder = new GameObjectRecorder(gameObject);
-        recorder.BindComponentsOfType<Transform>(weaponHolder.gameObject, false);
-        recorder.BindComponentsOfType<Transform>(targetWeaponPose.gameObject, false);
-        recorder.BindComponentsOfType<Transform>(leftGrip.gameObject, false);
-        recorder.BindComponentsOfType<Transform>(rightGrip.gameObject, false);
-        recorder.TakeSnapshot(0.0f);
-        recorder.SaveToClip(weapon.weaponAnimation);
     }
 
     void HandleHolster()

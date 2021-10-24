@@ -59,6 +59,7 @@ MonoBehaviour:
   raycastDestination: {fileID: 0}
   weaponAnimation: {fileID: 7400000, guid: be13f51feccd54e36827cd25777449d0, type: 2}
   weaponName: smg
+  weaponType: 1
 --- !u!1 &630455164851709115
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +197,7 @@ MonoBehaviour:
   raycastDestination: {fileID: 0}
   weaponAnimation: {fileID: 0}
   weaponName: 
+  weaponType: 0
 --- !u!1001 &630455164249209123
 PrefabInstance:
   m_ObjectHideFlags: 0

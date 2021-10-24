@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour
     public Transform raycastDestination;
     public AnimationClip weaponAnimation;
     public string weaponName;
+    public ActiveWeapon.WeaponType weaponType;
 
     private Ray ray;
     private float accumulatedTime;
