@@ -11,27 +11,17 @@ public class Weapon : MonoBehaviour
         public TrailRenderer tracer;
     }
 
-    [SerializeField]
-    private ParticleSystem muzzleFlash;
-    [SerializeField]
-    private Transform raycastOrigin;
-    [SerializeField]
-    public Transform raycastDestination;
-    [SerializeField]
-    private ParticleSystem impactPrefab;
-    [SerializeField]
-    private TrailRenderer tracerPrefab;
-    [SerializeField]
-    private float fireRate = 25.0f;
-    [SerializeField]
-    private float bulletSpeed = 1000.0f;
-    [SerializeField]
-    private float bulletDrop = 0.0f;
-    [SerializeField]
-    public AnimationClip weaponAnimationRelaxed;
-    [SerializeField]
-    public AnimationClip weaponAnimationAiming;
+    [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] private Transform raycastOrigin;
+    [SerializeField] private ParticleSystem impactPrefab;
+    [SerializeField] private TrailRenderer tracerPrefab;
+    [SerializeField] private float fireRate = 25.0f;
+    [SerializeField] private float bulletSpeed = 1000.0f;
+    [SerializeField] private float bulletDrop = 0.0f;
 
+    public Transform raycastDestination;
+    public AnimationClip weaponAnimation;
+    public string weaponName;
 
     private Ray ray;
     private float accumulatedTime;

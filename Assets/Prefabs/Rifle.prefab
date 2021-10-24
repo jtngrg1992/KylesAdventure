@@ -133,7 +133,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzleFlash: {fileID: 5565013644120648308}
   raycastOrigin: {fileID: 5763098419547740032}
-  raycastDestination: {fileID: 0}
   impactPrefab: {fileID: 7747656083400761458, guid: 5a79e05bd6f4d4147b4773ae27c526c9,
     type: 3}
   tracerPrefab: {fileID: 4993044837984080376, guid: 85762215797af4c58a86a6aea93e0da5,
@@ -141,10 +140,9 @@ MonoBehaviour:
   fireRate: 25
   bulletSpeed: 500
   bulletDrop: 1
-  weaponAnimationRelaxed: {fileID: 7400000, guid: 1fca540e6145e44898d0effbfade44fd,
-    type: 2}
-  weaponAnimationAiming: {fileID: 7400000, guid: 4d72de464f729493d82ae68359a06ff6,
-    type: 2}
+  raycastDestination: {fileID: 0}
+  weaponAnimation: {fileID: 7400000, guid: 1fca540e6145e44898d0effbfade44fd, type: 2}
+  weaponName: rifle
 --- !u!1 &5763098419243926295
 GameObject:
   m_ObjectHideFlags: 0

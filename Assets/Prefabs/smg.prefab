@@ -49,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzleFlash: {fileID: 5384067429447238595}
   raycastOrigin: {fileID: 630455164851709114}
-  raycastDestination: {fileID: 0}
   impactPrefab: {fileID: 7747656083400761458, guid: 5a79e05bd6f4d4147b4773ae27c526c9,
     type: 3}
   tracerPrefab: {fileID: 4993044837984080376, guid: 85762215797af4c58a86a6aea93e0da5,
@@ -57,10 +56,9 @@ MonoBehaviour:
   fireRate: 25
   bulletSpeed: 1000
   bulletDrop: 0
-  weaponAnimationRelaxed: {fileID: 7400000, guid: be13f51feccd54e36827cd25777449d0,
-    type: 2}
-  weaponAnimationAiming: {fileID: 7400000, guid: b8206d5485c814475946c86cf3a9b158,
-    type: 2}
+  raycastDestination: {fileID: 0}
+  weaponAnimation: {fileID: 7400000, guid: be13f51feccd54e36827cd25777449d0, type: 2}
+  weaponName: smg
 --- !u!1 &630455164851709115
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,14 +188,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzleFlash: {fileID: 0}
   raycastOrigin: {fileID: 0}
-  raycastDestination: {fileID: 0}
   impactPrefab: {fileID: 0}
   tracerPrefab: {fileID: 0}
   fireRate: 25
   bulletSpeed: 1000
   bulletDrop: 0
-  weaponAnimationRelaxed: {fileID: 0}
-  weaponAnimationAiming: {fileID: 0}
+  raycastDestination: {fileID: 0}
+  weaponAnimation: {fileID: 0}
+  weaponName: 
 --- !u!1001 &630455164249209123
 PrefabInstance:
   m_ObjectHideFlags: 0

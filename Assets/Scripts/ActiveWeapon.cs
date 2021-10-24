@@ -9,29 +9,20 @@ public class ActiveWeapon : MonoBehaviour
     public Transform weaponPoseAiming;
     public Transform leftGrip;
     public Transform rightGrip;
-    public Rig handIKRig;
+    public Animator rigController;
+
 
     Weapon weapon;
-    Animator animator;
-    AnimatorOverrideController animationOverride;
+    int holsterHash;
 
     void Awake()
     {
         Weapon existingWeapon = GetComponentInChildren<Weapon>();
-        animator = GetComponent<Animator>();
-        animationOverride = animator.runtimeAnimatorController as AnimatorOverrideController;
+        holsterHash = Animator.StringToHash("holster_weapon");
+
         if (existingWeapon)
         {
             Equip(existingWeapon);
-        }
-    }
-
-    void Update()
-    {
-        if (weapon == null)
-        {
-            handIKRig.weight = 0;
-            animator.SetLayerWeight(1, 0.0f);
         }
     }
 
@@ -46,30 +37,41 @@ public class ActiveWeapon : MonoBehaviour
         weapon.transform.parent = weaponHolder;
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
-        handIKRig.weight = 1;
-        animator.SetLayerWeight(1, 1.0f);
-
-        Invoke(nameof(SetAnimationOverrideDelayed), 0.001f);
+        rigController.Play($"equip_{weapon.weaponName.ToLower()}");
     }
 
-    void SetAnimationOverrideDelayed()
+    private void OnEnable()
     {
-        animationOverride["weapon_anim_empty"] = weapon.weaponAnimationRelaxed;
+        MInputManager.holsterRequested += HandleHolster;
+    }
+
+    private void OnDisable()
+    {
+        MInputManager.holsterRequested -= HandleHolster;
     }
 
     public void StartFiring()
     {
-        weapon.StartFiring();
+        if (weapon)
+        {
+            weapon.StartFiring();
+        }
     }
 
     public void UpdateFiring(float deltaTime)
     {
-        weapon.UpdateFiring(deltaTime);
+        if (weapon)
+        {
+            weapon.UpdateFiring(deltaTime);
+        }
     }
 
     public void UpdateBullets(float deltaTime)
     {
-        weapon.UpdateBullets(deltaTime);
+        if (weapon)
+        {
+            weapon.UpdateBullets(deltaTime);
+        }
     }
 
     void GrabClip(Transform targetWeaponPose)
@@ -80,19 +82,16 @@ public class ActiveWeapon : MonoBehaviour
         recorder.BindComponentsOfType<Transform>(leftGrip.gameObject, false);
         recorder.BindComponentsOfType<Transform>(rightGrip.gameObject, false);
         recorder.TakeSnapshot(0.0f);
-        recorder.SaveToClip(weapon.weaponAnimationRelaxed);
+        recorder.SaveToClip(weapon.weaponAnimation);
     }
 
-    [ContextMenu("Save Relaxed Weapon Pose")]
-    void SaveRelaxedWeaponPose()
+    void HandleHolster()
     {
-        GrabClip(weaponPoseRelaxed);
+        if (weapon)
+        {
+            bool isHolstered = rigController.GetBool(holsterHash);
+            bool target = !isHolstered;
+            rigController.SetBool(holsterHash, target);
+        }
     }
-
-    [ContextMenu("Saved Aiming Weapon Pose")]
-    void SaveAimingWeaponPose()
-    {
-        GrabClip(weaponPoseAiming);
-    }
-
 }
