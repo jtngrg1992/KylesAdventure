@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.Animations.Rigging;
 using UnityEditor.Animations;
 public class ActiveWeapon : MonoBehaviour
@@ -10,15 +11,15 @@ public class ActiveWeapon : MonoBehaviour
     }
 
     public Transform firingTarget;
-    public Transform weaponPoseRelaxed;
-    public Transform weaponPoseAiming;
     public Transform leftGrip;
     public Transform rightGrip;
     public Animator rigController;
     public Transform primaryWeaponHolder;
     public Transform secondaryWeaponHolder;
 
-    Weapon weapon;
+    Weapon[] weaponsOnPlayer = new Weapon[2];
+    int activeWeaponIndex;
+
     int holsterHash;
 
     void Awake()
@@ -32,27 +33,83 @@ public class ActiveWeapon : MonoBehaviour
         }
     }
 
+    Weapon GetEquippedWeapon(int index)
+    {
+        if (index < 0 || index > weaponsOnPlayer.Length)
+        {
+            return null;
+        }
+        return weaponsOnPlayer[index];
+    }
+
+    int? GetWeaponSlotIndex(Weapon weapon)
+    {
+        int? weaponIndex = null;
+
+        for (int i = 0; i < weaponsOnPlayer.Length; i++)
+        {
+            Weapon w = weaponsOnPlayer[i];
+            if (w)
+            {
+                if (w.name == weapon.name && w.weaponType == weapon.weaponType)
+                {
+                    weaponIndex = i;
+                    break;
+                }
+            }
+        }
+        return weaponIndex;
+    }
+
+    int? GetFirstAvailableSlotForWeapon()
+    {
+        int? availableSlotIndex = null;
+
+        for (int i = 0; i < weaponsOnPlayer.Length; i++)
+        {
+            if (weaponsOnPlayer[i] == null)
+            {
+                availableSlotIndex = i;
+                break;
+            }
+        }
+        return availableSlotIndex;
+    }
+
     public void Equip(Weapon newWeapon)
     {
-        if (this.weapon)
-        {
-            Destroy(this.weapon.gameObject);
-        }
-        weapon = newWeapon;
-        weapon.raycastDestination = firingTarget;
+        int? slotIndex = GetWeaponSlotIndex(newWeapon);
 
-        switch (weapon.weaponType)
+        if (slotIndex != null)
         {
-            case WeaponType.Primary:
-                weapon.transform.parent = primaryWeaponHolder;
-                break;
-            case WeaponType.Secondary:
-                weapon.transform.parent = secondaryWeaponHolder;
-                break;
+            // weapon can't be equipped
+            Destroy(newWeapon.gameObject);
+            return;
         }
-        weapon.transform.localPosition = Vector3.zero;
-        weapon.transform.localRotation = Quaternion.identity;
-        rigController.Play($"equip_{weapon.weaponName.ToLower()}");
+
+        int? availableSlot = GetFirstAvailableSlotForWeapon();
+
+        if (availableSlot != null)
+        {
+            int index = (int)availableSlot;
+            weaponsOnPlayer[index] = newWeapon;
+            activeWeaponIndex = index;
+
+            weaponsOnPlayer[index].raycastDestination = firingTarget;
+
+            switch (weaponsOnPlayer[index].weaponType)
+            {
+                case WeaponType.Primary:
+                    weaponsOnPlayer[index].transform.parent = primaryWeaponHolder;
+                    break;
+                case WeaponType.Secondary:
+                    weaponsOnPlayer[index].transform.parent = secondaryWeaponHolder;
+                    break;
+            }
+            weaponsOnPlayer[index].transform.localPosition = Vector3.zero;
+            weaponsOnPlayer[index].transform.localRotation = Quaternion.identity;
+            rigController.Play($"equip_{weaponsOnPlayer[index].weaponName.ToLower()}");
+        }
     }
 
     private void OnEnable()
@@ -67,6 +124,7 @@ public class ActiveWeapon : MonoBehaviour
 
     public void StartFiring()
     {
+        Weapon weapon = GetEquippedWeapon(activeWeaponIndex);
         if (weapon)
         {
             weapon.StartFiring();
@@ -75,6 +133,7 @@ public class ActiveWeapon : MonoBehaviour
 
     public void UpdateFiring(float deltaTime)
     {
+        Weapon weapon = GetEquippedWeapon(activeWeaponIndex);
         if (weapon)
         {
             weapon.UpdateFiring(deltaTime);
@@ -83,6 +142,7 @@ public class ActiveWeapon : MonoBehaviour
 
     public void UpdateBullets(float deltaTime)
     {
+        Weapon weapon = GetEquippedWeapon(activeWeaponIndex);
         if (weapon)
         {
             weapon.UpdateBullets(deltaTime);
@@ -91,6 +151,7 @@ public class ActiveWeapon : MonoBehaviour
 
     void HandleHolster()
     {
+        Weapon weapon = GetEquippedWeapon(activeWeaponIndex);
         if (weapon)
         {
             bool isHolstered = rigController.GetBool(holsterHash);
