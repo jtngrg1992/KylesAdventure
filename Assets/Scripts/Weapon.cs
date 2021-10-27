@@ -23,6 +23,7 @@ public class Weapon : MonoBehaviour
     public AnimationClip weaponAnimation;
     public string weaponName;
     public ActiveWeapon.WeaponType weaponType;
+    [HideInInspector] public Recoil recoil;
 
     private Ray ray;
     private float accumulatedTime;
@@ -30,10 +31,17 @@ public class Weapon : MonoBehaviour
     private List<Bullet> bullets = new List<Bullet>();
     private float maxBulletLife = 3.0f;
 
+
+    private void Awake()
+    {
+        recoil = GetComponent<Recoil>();
+    }
+
     public void StartFiring()
     {
         accumulatedTime = 0.0f;
         FireBullet();
+        recoil.ResetRecoil();
     }
 
     public void UpdateFiring(float deltaTime)
@@ -103,6 +111,7 @@ public class Weapon : MonoBehaviour
         Vector3 bulletVelocity = fireDirection.normalized * bulletSpeed;
         var bullet = CreateBullet(raycastOrigin.position, bulletVelocity);
         bullets.Add(bullet);
+        recoil.GenerateRecoil();
     }
 
     private Vector3 GetBulletPosition(Bullet bullet)

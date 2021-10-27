@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Animations.Rigging;
 using UnityEditor.Animations;
+using Cinemachine;
 public class ActiveWeapon : MonoBehaviour
 {
     public enum WeaponType
@@ -16,8 +17,10 @@ public class ActiveWeapon : MonoBehaviour
     public Animator rigController;
     public Transform primaryWeaponHolder;
     public Transform secondaryWeaponHolder;
+    public Cinemachine.CinemachineVirtualCamera aimCamera;
 
     Weapon[] weaponsOnPlayer = new Weapon[2];
+
     int activeWeaponIndex;
 
     int holsterHash;
@@ -105,23 +108,26 @@ public class ActiveWeapon : MonoBehaviour
         if (availableSlot != null)
         {
             int index = (int)availableSlot;
-            weaponsOnPlayer[index] = newWeapon;
+
             activeWeaponIndex = index;
 
-            weaponsOnPlayer[index].raycastDestination = firingTarget;
+            newWeapon.raycastDestination = firingTarget;
 
-            switch (weaponsOnPlayer[index].weaponType)
+            switch (newWeapon.weaponType)
             {
                 case WeaponType.Primary:
-                    weaponsOnPlayer[index].transform.parent = primaryWeaponHolder;
+                    newWeapon.transform.parent = primaryWeaponHolder.transform;
                     break;
                 case WeaponType.Secondary:
-                    weaponsOnPlayer[index].transform.parent = secondaryWeaponHolder;
+                    newWeapon.transform.parent = secondaryWeaponHolder.transform;
                     break;
             }
-            weaponsOnPlayer[index].transform.localPosition = Vector3.zero;
-            weaponsOnPlayer[index].transform.localRotation = Quaternion.identity;
-            rigController.Play($"equip_{weaponsOnPlayer[index].weaponName.ToLower()}");
+            newWeapon.transform.localPosition = Vector3.zero;
+            newWeapon.transform.localRotation = Quaternion.identity;
+            newWeapon.recoil.aimingVirtualCamera = aimCamera;
+            newWeapon.recoil.aimingVirtualCamera = aimCamera;
+            weaponsOnPlayer[index] = newWeapon;
+            rigController.Play($"equip_{newWeapon.weaponName.ToLower()}");
         }
     }
 

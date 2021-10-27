@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 630455164065603374}
   - component: {fileID: 630455164065603373}
+  - component: {fileID: 4162154632806412426}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -60,6 +61,20 @@ MonoBehaviour:
   weaponAnimation: {fileID: 7400000, guid: be13f51feccd54e36827cd25777449d0, type: 2}
   weaponName: smg
   weaponType: 1
+  recoil: {fileID: 0}
+--- !u!114 &4162154632806412426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630455164065603375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e26bbf00a5a46bfa024d84ad61d067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimingVirtualCamera: {fileID: 0}
 --- !u!1 &630455164851709115
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +213,7 @@ MonoBehaviour:
   weaponAnimation: {fileID: 0}
   weaponName: 
   weaponType: 0
+  recoil: {fileID: 0}
 --- !u!1001 &630455164249209123
 PrefabInstance:
   m_ObjectHideFlags: 0
