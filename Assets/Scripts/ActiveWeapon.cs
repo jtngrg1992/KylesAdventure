@@ -115,6 +115,7 @@ public class ActiveWeapon : MonoBehaviour
     private void OnEnable()
     {
         MInputManager.holsterRequested += HandleHolster;
+        MInputManager.switchRequested += HandleSwitch;
     }
 
     private void OnDisable()
@@ -158,5 +159,10 @@ public class ActiveWeapon : MonoBehaviour
             bool target = !isHolstered;
             rigController.SetBool(holsterHash, target);
         }
+    }
+
+    void HandleSwitch()
+    {
+        Debug.Log("yo");
     }
 }

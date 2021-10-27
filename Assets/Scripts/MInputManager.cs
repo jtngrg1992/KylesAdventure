@@ -17,6 +17,7 @@ class MInputManager
     private InputAction aimAction;
     private InputAction shootAction;
     private InputAction holsterAction;
+    private InputAction switchAction;
 
     public static event NotifyMovement movementPressed;
     public static event NotifyAction sprintEngaged;
@@ -27,6 +28,7 @@ class MInputManager
     public static event NotifyAction shootingStarted;
     public static event NotifyAction shootingCancelled;
     public static event NotifyAction holsterRequested;
+    public static event NotifyAction switchRequested;
 
     private MInputManager() { }
 
@@ -59,6 +61,7 @@ class MInputManager
         this.aimAction = this.playerInput.actions["Aim"];
         this.shootAction = this.playerInput.actions["Shoot"];
         this.holsterAction = this.playerInput.actions["HolsterWeapon"];
+        this.switchAction = this.playerInput.actions["SwitchWeapon"];
 
         this.moveAction.performed += HandleMovement;
         this.moveAction.canceled += HandleMovement;
@@ -75,6 +78,7 @@ class MInputManager
         this.shootAction.canceled += (_) => HandleShootEnd();
 
         this.holsterAction.performed += (_) => HandleHolster();
+        this.switchAction.performed += (_) => HandleSwitch();
     }
 
     private void HandleMovement(InputAction.CallbackContext context)
@@ -120,5 +124,10 @@ class MInputManager
     private void HandleHolster()
     {
         holsterRequested?.Invoke();
+    }
+
+    private void HandleSwitch()
+    {
+        switchRequested?.Invoke();
     }
 }
