@@ -62,9 +62,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SwitchWeapon",
+                    "name": "SwitchWeaponPrimary",
                     "type": "Button",
                     "id": "aa2e938c-bc1b-4086-8248-bd1f218aa1d6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SwitchWeaponSecondary",
+                    "type": "Button",
+                    "id": "f853e5c2-669b-4151-a6dd-42467b40ac94",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -199,7 +207,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwitchWeapon",
+                    "action": "SwitchWeaponPrimary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ece8f248-bf1e-4bde-9d78-ff2a4599fe22",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeaponSecondary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

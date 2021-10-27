@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.Animations.Rigging;
 using UnityEditor.Animations;
 public class ActiveWeapon : MonoBehaviour
@@ -76,6 +76,19 @@ public class ActiveWeapon : MonoBehaviour
         return availableSlotIndex;
     }
 
+    public Weapon GetWeaponOfType(WeaponType wtype)
+    {
+        for (int i = 0; i < weaponsOnPlayer.Length; i++)
+        {
+            var weapon = weaponsOnPlayer[i];
+            if (weapon && weapon.weaponType == wtype)
+            {
+                return weapon;
+            }
+        }
+        return null;
+    }
+
     public void Equip(Weapon newWeapon)
     {
         int? slotIndex = GetWeaponSlotIndex(newWeapon);
@@ -115,12 +128,15 @@ public class ActiveWeapon : MonoBehaviour
     private void OnEnable()
     {
         MInputManager.holsterRequested += HandleHolster;
-        MInputManager.switchRequested += HandleSwitch;
+        MInputManager.switchPrimaryRequested += HandleSwitchPrimary;
+        MInputManager.switchSecondaryRequested += HandleSwitchSecondary;
     }
 
     private void OnDisable()
     {
         MInputManager.holsterRequested -= HandleHolster;
+        MInputManager.switchPrimaryRequested -= HandleSwitchPrimary;
+        MInputManager.switchSecondaryRequested -= HandleSwitchSecondary;
     }
 
     public void StartFiring()
@@ -152,17 +168,71 @@ public class ActiveWeapon : MonoBehaviour
 
     void HandleHolster()
     {
-        Weapon weapon = GetEquippedWeapon(activeWeaponIndex);
-        if (weapon)
-        {
-            bool isHolstered = rigController.GetBool(holsterHash);
-            bool target = !isHolstered;
-            rigController.SetBool(holsterHash, target);
-        }
+        StartCoroutine(HolsterWeapon(activeWeaponIndex));
     }
 
-    void HandleSwitch()
+    void HandleSwitchPrimary()
     {
-        Debug.Log("yo");
+        var currentWeapon = GetEquippedWeapon(activeWeaponIndex);
+        if (currentWeapon)
+        {
+            if (currentWeapon.weaponType == WeaponType.Secondary)
+            {
+                // need to switch to primary
+                var primaryWeapon = GetWeaponOfType(WeaponType.Primary);
+                if (primaryWeapon)
+                {
+                    StartCoroutine(HolsterWeapon(activeWeaponIndex));
+                    string animationName = $"equip_{primaryWeapon.weaponName.ToLower()}";
+                    rigController.Play(animationName);
+                    activeWeaponIndex = (int)GetWeaponSlotIndex(primaryWeapon);
+                }
+            }
+            else
+            {
+                // player only has secondary weapon
+                string animationName = $"equip_{currentWeapon.weaponName.ToLower()}";
+                rigController.Play(animationName);
+            }
+        }
+        rigController.SetBool(holsterHash, false);
+    }
+
+    void HandleSwitchSecondary()
+    {
+        var currentWeapon = GetEquippedWeapon(activeWeaponIndex);
+        if (currentWeapon)
+        {
+            if (currentWeapon.weaponType == WeaponType.Primary)
+            {
+                // need to switch to primary
+                var secondaryWeapon = GetWeaponOfType(WeaponType.Secondary);
+                if (secondaryWeapon)
+                {
+                    StartCoroutine(HolsterWeapon(activeWeaponIndex));
+                    string animationName = $"equip_{secondaryWeapon.weaponName.ToLower()}";
+                    rigController.Play(animationName);
+                    activeWeaponIndex = (int)GetWeaponSlotIndex(secondaryWeapon);
+                }
+            }
+            else
+            {
+                // player only has secondary weapon
+                string animationName = $"equip_{currentWeapon.weaponName.ToLower()}";
+                rigController.Play(animationName);
+            }
+        }
+        rigController.SetBool(holsterHash, false);
+    }
+
+    IEnumerator HolsterWeapon(int index)
+    {
+        var weapon = GetEquippedWeapon(index);
+
+        if (weapon)
+        {
+            rigController.SetBool(holsterHash, true);
+            yield return new WaitUntil(() => rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+        }
     }
 }

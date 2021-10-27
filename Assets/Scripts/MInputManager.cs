@@ -17,7 +17,9 @@ class MInputManager
     private InputAction aimAction;
     private InputAction shootAction;
     private InputAction holsterAction;
-    private InputAction switchAction;
+    private InputAction switchPrimaryAction;
+    private InputAction switchSecondaryAction;
+
 
     public static event NotifyMovement movementPressed;
     public static event NotifyAction sprintEngaged;
@@ -28,7 +30,8 @@ class MInputManager
     public static event NotifyAction shootingStarted;
     public static event NotifyAction shootingCancelled;
     public static event NotifyAction holsterRequested;
-    public static event NotifyAction switchRequested;
+    public static event NotifyAction switchPrimaryRequested;
+    public static event NotifyAction switchSecondaryRequested;
 
     private MInputManager() { }
 
@@ -61,7 +64,8 @@ class MInputManager
         this.aimAction = this.playerInput.actions["Aim"];
         this.shootAction = this.playerInput.actions["Shoot"];
         this.holsterAction = this.playerInput.actions["HolsterWeapon"];
-        this.switchAction = this.playerInput.actions["SwitchWeapon"];
+        this.switchPrimaryAction = this.playerInput.actions["SwitchWeaponPrimary"];
+        this.switchSecondaryAction = this.playerInput.actions["SwitchWeaponSecondary"];
 
         this.moveAction.performed += HandleMovement;
         this.moveAction.canceled += HandleMovement;
@@ -78,7 +82,8 @@ class MInputManager
         this.shootAction.canceled += (_) => HandleShootEnd();
 
         this.holsterAction.performed += (_) => HandleHolster();
-        this.switchAction.performed += (_) => HandleSwitch();
+        this.switchPrimaryAction.performed += (_) => HandleSwitchPrimary();
+        this.switchSecondaryAction.performed += (_) => HandleSwitchSecondary();
     }
 
     private void HandleMovement(InputAction.CallbackContext context)
@@ -126,8 +131,13 @@ class MInputManager
         holsterRequested?.Invoke();
     }
 
-    private void HandleSwitch()
+    private void HandleSwitchPrimary()
     {
-        switchRequested?.Invoke();
+        switchPrimaryRequested?.Invoke();
+    }
+
+    private void HandleSwitchSecondary()
+    {
+        switchSecondaryRequested?.Invoke();
     }
 }
