@@ -111,7 +111,7 @@ public class Weapon : MonoBehaviour
         Vector3 bulletVelocity = fireDirection.normalized * bulletSpeed;
         var bullet = CreateBullet(raycastOrigin.position, bulletVelocity);
         bullets.Add(bullet);
-        recoil.GenerateRecoil();
+        recoil.GenerateRecoil(weaponName);
     }
 
     private Vector3 GetBulletPosition(Bullet bullet)

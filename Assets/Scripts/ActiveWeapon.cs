@@ -125,7 +125,7 @@ public class ActiveWeapon : MonoBehaviour
             newWeapon.transform.localPosition = Vector3.zero;
             newWeapon.transform.localRotation = Quaternion.identity;
             newWeapon.recoil.aimingVirtualCamera = aimCamera;
-            newWeapon.recoil.aimingVirtualCamera = aimCamera;
+            newWeapon.recoil.rigController = rigController;
             weaponsOnPlayer[index] = newWeapon;
             rigController.Play($"equip_{newWeapon.weaponName.ToLower()}");
         }

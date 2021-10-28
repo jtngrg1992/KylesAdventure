@@ -162,6 +162,22 @@ MonoBehaviour:
   verticalRecoil: 800
   horizontalRecoil: 800
   duration: 0.1
+  recoilPattern:
+  - {x: 10, y: 10}
+  - {x: 7, y: 10}
+  - {x: 5, y: 10}
+  - {x: 2, y: 10}
+  - {x: 1, y: 10}
+  - {x: -2, y: 10}
+  - {x: -5, y: 10}
+  - {x: -7, y: 10}
+  - {x: -10, y: 10}
+  - {x: -7, y: 10}
+  - {x: -5, y: 10}
+  - {x: -2, y: 10}
+  - {x: -1, y: 10}
+  - {x: 2, y: 10}
+  - {x: 5, y: 10}
   aimingVirtualCamera: {fileID: 0}
   cameraShake: {fileID: 0}
 --- !u!114 &-8161177913421536544
