@@ -36,6 +36,11 @@ public class ActiveWeapon : MonoBehaviour
         }
     }
 
+    public Weapon GetActiveWeapon()
+    {
+        return weaponsOnPlayer[activeWeaponIndex];
+    }
+
     Weapon GetEquippedWeapon(int index)
     {
         if (index < 0 || index > weaponsOnPlayer.Length)

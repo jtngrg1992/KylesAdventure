@@ -4575,75 +4575,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1001 &3310587790339510132
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267047961013520796, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4568745964735422031, guid: ed8597c2fbe63400290d529bc17346fe,
-        type: 3}
-      propertyPath: m_Name
-      value: M4Rifle
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ed8597c2fbe63400290d529bc17346fe, type: 3}
 --- !u!1 &3337690611906256126
 GameObject:
   m_ObjectHideFlags: 0
@@ -5905,6 +5836,7 @@ GameObject:
   - component: {fileID: 8407447325600169644}
   - component: {fileID: 8407447325600169646}
   - component: {fileID: 8407447325600169647}
+  - component: {fileID: 8407447325600169648}
   m_Layer: 0
   m_Name: Robot Kyle
   m_TagString: Untagged
@@ -6109,6 +6041,18 @@ MonoBehaviour:
   primaryWeaponHolder: {fileID: 2095429538}
   secondaryWeaponHolder: {fileID: 3793334}
   aimCamera: {fileID: 1766954583}
+--- !u!114 &8407447325600169648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8407447325600169640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06faf8a3bd0e647798dfcf3af629c7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8431315414480811887
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ class MInputManager
     private InputAction holsterAction;
     private InputAction switchPrimaryAction;
     private InputAction switchSecondaryAction;
-
+    private InputAction reloadWeaponAction;
 
     public static event NotifyMovement movementPressed;
     public static event NotifyAction sprintEngaged;
@@ -32,6 +32,7 @@ class MInputManager
     public static event NotifyAction holsterRequested;
     public static event NotifyAction switchPrimaryRequested;
     public static event NotifyAction switchSecondaryRequested;
+    public static event NotifyAction reloadTriggered;
 
     private MInputManager() { }
 
@@ -66,6 +67,7 @@ class MInputManager
         this.holsterAction = this.playerInput.actions["HolsterWeapon"];
         this.switchPrimaryAction = this.playerInput.actions["SwitchWeaponPrimary"];
         this.switchSecondaryAction = this.playerInput.actions["SwitchWeaponSecondary"];
+        this.reloadWeaponAction = this.playerInput.actions["ReloadWeapon"];
 
         this.moveAction.performed += HandleMovement;
         this.moveAction.canceled += HandleMovement;
@@ -84,6 +86,7 @@ class MInputManager
         this.holsterAction.performed += (_) => HandleHolster();
         this.switchPrimaryAction.performed += (_) => HandleSwitchPrimary();
         this.switchSecondaryAction.performed += (_) => HandleSwitchSecondary();
+        this.reloadWeaponAction.performed += (_) => HandleReload();
     }
 
     private void HandleMovement(InputAction.CallbackContext context)
@@ -139,5 +142,10 @@ class MInputManager
     private void HandleSwitchSecondary()
     {
         switchSecondaryRequested?.Invoke();
+    }
+
+    private void HandleReload()
+    {
+        reloadTriggered?.Invoke();
     }
 }
