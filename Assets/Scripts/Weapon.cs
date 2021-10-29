@@ -19,7 +19,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float bulletSpeed = 1000.0f;
     [SerializeField] private float bulletDrop = 0.0f;
 
+
     public Transform raycastDestination;
+    public GameObject ammoClip;
     public AnimationClip weaponAnimation;
     public string weaponName;
     public ActiveWeapon.WeaponType weaponType;

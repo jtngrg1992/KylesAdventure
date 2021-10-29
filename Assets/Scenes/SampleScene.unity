@@ -6067,6 +6067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigController: {fileID: 283657328}
+  weaponAnimationEvents: {fileID: 283657329}
 --- !u!1001 &8431315414480811887
 PrefabInstance:
   m_ObjectHideFlags: 0

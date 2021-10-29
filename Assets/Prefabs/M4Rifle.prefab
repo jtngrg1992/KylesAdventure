@@ -59,6 +59,7 @@ MonoBehaviour:
   bulletSpeed: 1000
   bulletDrop: 0.5
   raycastDestination: {fileID: 0}
+  ammoClip: {fileID: 6319954686886178075}
   weaponAnimation: {fileID: 7400000, guid: 1fca540e6145e44898d0effbfade44fd, type: 2}
   weaponName: rifle
   weaponType: 0
