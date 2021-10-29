@@ -395,6 +395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 283657327}
   - component: {fileID: 283657328}
+  - component: {fileID: 283657329}
   m_Layer: 0
   m_Name: -----Rig Layers-----
   m_TagString: Untagged
@@ -442,6 +443,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &283657329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283657326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7eb1af8e64df4cc089fd0d8101aefc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &291669438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4035765028099436, guid: 5527826a6315a224d850675a730c4f62,
@@ -703,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Effectors:
   - m_Transform: {fileID: 136845825}
     m_Style:
@@ -6053,6 +6066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06faf8a3bd0e647798dfcf3af629c7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigController: {fileID: 283657328}
 --- !u!1001 &8431315414480811887
 PrefabInstance:
   m_ObjectHideFlags: 0

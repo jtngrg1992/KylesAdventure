@@ -6,11 +6,13 @@ public class ReloadWeapon : MonoBehaviour
 {
     public Animator rigController;
     ActiveWeapon activeWeapon;
+    int reloadHash;
 
 
     private void Awake()
     {
         activeWeapon = GetComponent<ActiveWeapon>();
+        reloadHash = Animator.StringToHash("reload");
     }
 
     private void OnEnable()
@@ -31,6 +33,9 @@ public class ReloadWeapon : MonoBehaviour
     private void HandleReload()
     {
         var currentWeapon = activeWeapon.GetActiveWeapon();
-        Debug.Log(currentWeapon.weaponName);
+        if (currentWeapon)
+        {
+            rigController.SetTrigger(reloadHash);
+        }
     }
 }
